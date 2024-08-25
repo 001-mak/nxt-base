@@ -16,15 +16,15 @@ export async function POST(request: { json: () => PromiseLike<{ title: any; desc
     }
   }
 
-// export async function GET() {
-//   await connectMongoDB();
-//   const topics = await Topic.find();
-//   return NextResponse.json({ topics });
-// }
+export async function GET() {
+  await connectDb();
+  const topics = await Todo.find();
+  return NextResponse.json({ topics });
+}
 
-// export async function DELETE(request) {
-//   const id = request.nextUrl.searchParams.get("id");
-//   await connectMongoDB();
-//   await Topic.findByIdAndDelete(id);
-//   return NextResponse.json({ message: "Topic deleted" }, { status: 200 });
-// }
+export async function DELETE(request: { nextUrl: { searchParams: { get: (arg0: string) => any; }; }; }) {
+  const id = request.nextUrl.searchParams.get("id");
+  await connectDb();
+  await Todo.findByIdAndDelete(id);
+  return NextResponse.json({ message: "Topic deleted" }, { status: 200 });
+}
